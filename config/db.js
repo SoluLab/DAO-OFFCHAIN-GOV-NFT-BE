@@ -11,14 +11,14 @@ module.exports = () => {
         dbStatus = `*    Error connecting to DB: ${err}\n****************************\n`
       }
       dbStatus = `*    DB Connection: OK\n****************************\n`
-      if (process.env.NODE_ENV !== 'test') {
+    //   if (process.env.NODE_ENV !== 'test') {
         // Prints initialization
         console.log('****************************')
         console.log('*    Starting Server')
         console.log(`*    Port: ${process.env.PORT || 3000}`)
         console.log(`*    Database: MongoDB`)
         console.log(dbStatus)
-      }
+    //   }
     })
   }
   connect()

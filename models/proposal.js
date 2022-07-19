@@ -6,8 +6,17 @@ const SignatureSchema = new mongoose.Schema({
 })
 
 const ProposalSchema = new mongoose.Schema({
-    proposalHash: { type: String, required: true },
-    signatureCounts: { type: String, required: true },
+    proposalName: {
+        type: String, required: true
+    },
+    proposalDesc: {
+        type: String, required: true
+    },
+    proposalQuoram: {
+        type: Number, required: true
+    },
+    proposalHash: { type: String },
+    signatureCounts: { type: String },
     signature: [SignatureSchema]
 })
 

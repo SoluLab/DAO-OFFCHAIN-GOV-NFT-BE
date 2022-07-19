@@ -10,7 +10,6 @@ module.exports.pinJSON = (body) => {
     return new Promise((resolve, reject) => {
         pinata.pinJSONToIPFS(body, options).then((result) => {
             //handle results here
-            console.log(result);
             resolve(result);
         }).catch((err) => {
             //handle error here
