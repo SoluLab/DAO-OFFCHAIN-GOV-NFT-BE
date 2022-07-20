@@ -11,13 +11,13 @@ const initMongo = require('./config/db')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 const proposalRouter = require('./routes/index');
 
 app.use(express.static(__dirname + "public"));
 app.use(express.static(path.resolve(__dirname, "./public")));
 app.use('/proposal', proposalRouter);
 
-app.use(cors())
 
 app.get('/', (req, res) => {
     res.json("Server is running");
