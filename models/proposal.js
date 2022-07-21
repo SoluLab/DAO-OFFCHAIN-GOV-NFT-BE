@@ -35,10 +35,13 @@ const ProposalSchema = new mongoose.Schema({
     snapshotBlockNumber : {
         type: Number
     },
+    proposalSignature: {
+        type: String, required: true
+    },
     votingOptions: [VotingSchema],
     proposalHash: { type: String },
-    signatureCounts: { type: Number },
-    signature: [SignatureSchema]
+    voteCounts: { type: Number },
+    voteSignature: [SignatureSchema]
 })
 
 module.exports = mongoose.model(
