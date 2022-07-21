@@ -59,3 +59,16 @@ module.exports.getMyProposals = async (req, res) => {
         res.status(500).json({'success': false, 'data': err.Error})
     }
 }
+
+module.exports.countVotes = async (req, res) => {
+    try{
+        let data = await proposalModel.find({proposalHash : req.params.proposalHash});
+        console.log('%c 🌭 data: ', 'font-size:20px;background-color: #3F7CFF;color:#fff;', data);
+
+        // if (data) {
+        //     res.status(200).json({ status: true, message : "proposal retrieve successfully..!", data: data });
+        // }
+    }catch(err){
+        res.status(500).json({'success': false, 'data': err.Error})
+    }
+}

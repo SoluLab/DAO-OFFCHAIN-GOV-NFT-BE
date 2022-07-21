@@ -8,7 +8,8 @@ const SignatureSchema = new mongoose.Schema({
 
 const VotingSchema = new mongoose.Schema({
     index: {type: Number},
-    option: { type : String}
+    option: { type : String},
+    count: {type : Number}
 })
 
 const ProposalSchema = new mongoose.Schema({
@@ -30,6 +31,9 @@ const ProposalSchema = new mongoose.Schema({
     },
     endTime: {
         type: Date, required: true
+    },
+    snapshotBlockNumber : {
+        type: Number
     },
     votingOptions: [VotingSchema],
     proposalHash: { type: String },
