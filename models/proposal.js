@@ -6,6 +6,11 @@ const SignatureSchema = new mongoose.Schema({
     sign: { type : String}
 })
 
+const VotingSchema = new mongoose.Schema({
+    index: {type: Number},
+    option: { type : String}
+})
+
 const ProposalSchema = new mongoose.Schema({
     userAddress: {
         type: String,
@@ -20,6 +25,13 @@ const ProposalSchema = new mongoose.Schema({
     proposalQuoram: {
         type: Number, required: true
     },
+    startTime: {
+        type: Date, required: true
+    },
+    endTime: {
+        type: Date, required: true
+    },
+    votingOptions: [VotingSchema],
     proposalHash: { type: String },
     signatureCounts: { type: Number },
     signature: [SignatureSchema]
