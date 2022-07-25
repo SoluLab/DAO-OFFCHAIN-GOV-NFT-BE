@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const SignatureSchema = new mongoose.Schema({
     userAddress: { type : String},
     vote: {type: Number},
-    sign: { type : String}
+    sign: { type : String},
+    tokenId: [{type: Number}]
 })
 
 const VotingSchema = new mongoose.Schema({

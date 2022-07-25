@@ -4,7 +4,7 @@ const {getUserBalanceAtBlockNumber} = require('../helper/contractMethods');
 
 module.exports.addSignature = async (req, res) => {
     try{
-        if(req.body.votingPower <= getUserBalanceAtBlockNumber(req.body.userAddress)){
+        if(req.body.votingPower <= getUserBalanceAtBlockNumber(req.body.userAddress) && req.body.votingPower <= req.body.signature.tokenIds.length){
 
             proposalModel.findOneAndUpdate({proposalHash: req.params.proposalHash}, {$inc: {voteCounts: 1}, $push : {voteSignature: req.body.signature } }, {useFindAndModify: false, new: true}).exec(async function(error, result){
                 if(error){
