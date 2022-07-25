@@ -33,14 +33,14 @@ const ProposalSchema = new mongoose.Schema({
         type: Date, required: true
     },
     snapshotBlockNumber : {
-        type: Number
+        type: Number, required: true
     },
     proposalSignature: {
         type: String, required: true
     },
     votingOptions: [VotingSchema],
     proposalHash: { type: String },
-    voteCounts: { type: Number },
+    voteCounts: { type: Number, default: 0 },
     voteSignature: [SignatureSchema]
 })
 

@@ -18,7 +18,6 @@ app.use(express.static(__dirname + "public"));
 app.use(express.static(path.resolve(__dirname, "./public")));
 app.use('/proposal', proposalRouter);
 
-
 app.get('/', (req, res) => {
     res.json("Server is running");
 })
