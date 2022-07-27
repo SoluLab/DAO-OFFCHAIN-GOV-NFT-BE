@@ -1,16 +1,24 @@
-const express = require('express')
-const router = express.Router()
-const {createProposal, getAllProposal, getProposalByHash, getMyProposals} = require('../controller/proposal');
-const {addSignature} = require('../controller/signature');
+const express = require("express");
+const router = express.Router();
+const {
+  createProposal,
+  getAllProposal,
+  getProposalByHash,
+  getMyProposals,
+  countVotes,
+} = require("../controller/proposal");
+const { addSignature } = require("../controller/signature");
 
-router.post('/', createProposal);
+router.post("/", createProposal);
 
-router.get('/', getAllProposal);
+router.get("/", getAllProposal);
 
-router.get('/:proposalHash', getProposalByHash);
+router.get("/:proposalHash", getProposalByHash);
 
-router.get('/myProposal/:userAddress', getMyProposals);
+router.get("/myProposal/:userAddress", getMyProposals);
 
-router.put('/:proposalHash', addSignature);
+router.get("/MyVote/:proposalHash", countVotes);
 
-module.exports = router
+router.put("/:proposalHash", addSignature);
+
+module.exports = router;
