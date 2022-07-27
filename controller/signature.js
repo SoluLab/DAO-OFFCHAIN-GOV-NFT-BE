@@ -20,36 +20,39 @@ module.exports.addSignature = async (req, res) => {
       req.body.signature.userAddress
     );
     if (
-      req.body.votingPower <= balance &&
-      req.body.votingPower <= req.body.signature.tokenId.length
+      req.body.signature.voteCount <= balance &&
+      req.body.signature.voteCount <= req.body.signature.tokenId.length
     ) {
       proposalModel
         .findOneAndUpdate(
           { proposalHash: req.params.proposalHash },
           {
-            $inc: { voteCounts: req.body.votingPower },
+            $inc: { voteCounts: req.body.signature.voteCount },
             $push: { voteSignature: req.body.signature },
           },
           { useFindAndModify: false, new: true }
         )
         .exec(async function (error, result) {
           if (error) {
-            res
-              .status(500)
-              .json({
-                status: false,
-                message: "Error While add supplier",
-                data: null,
-              });
+            console.log(
+              "%c 🍭 error: ",
+              "font-size:20px;background-color: #33A5FF;color:#fff;",
+              error
+            );
+            res.status(500).json({
+              status: false,
+              message: "Error While voting",
+              data: null,
+            });
           } else {
             if (result) {
               const votingOptions = [];
               result.votingOptions.forEach((element) => {
-                if (element.index == req.body.signature.vote) {
+                if (element.index == req.body.signature.voteFor) {
                   votingOptions.push({
                     index: element.index,
                     option: element.option,
-                    count: element.count + req.body.votingPower,
+                    count: element.count + req.body.signature.voteCount,
                     _id: element._id,
                   });
                 } else {
@@ -65,23 +68,19 @@ module.exports.addSignature = async (req, res) => {
                 },
                 { new: true }
               );
-              res
-                .status(200)
-                .json({
-                  status: true,
-                  message: "Signature added successfully...!",
-                  data: data123,
-                });
+              res.status(200).json({
+                status: true,
+                message: "Signature added successfully...!",
+                data: data123,
+              });
             }
           }
         });
     } else {
-      res
-        .status(500)
-        .json({
-          success: false,
-          data: "user doesn't have enough voting power",
-        });
+      res.status(500).json({
+        success: false,
+        data: "user doesn't have enough voting power",
+      });
     }
   } catch (err) {
     res.status(500).json({ success: false, data: err.Error });
