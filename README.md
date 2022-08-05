@@ -24,9 +24,8 @@ npm start
 
 ## Important Step
 
-```bash
-create .env file in root directory.
-```
+
+copy `.env.example` file with `.env` file in root directory.
 
 ```bash
     PORT=
@@ -37,3 +36,4 @@ create .env file in root directory.
     INFURA_KEY=
 
 ```
+_Make required changes in `.env` file_
